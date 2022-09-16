@@ -2,26 +2,20 @@ FROM ubuntu:latest
 
 # update
 RUN apt-get -y update && apt-get install -y \
-sudo \
-wget \
-vim
+    sudo \
+    wget \
+    vim
 
-#install anaconda3
+# install anaconda3
 WORKDIR /opt
 
-# download anaconda package and install anaconda
 # archive -> https://repo.continuum.io/archive/
-# latest-version is Anaconda3-2022.05-Linux-x86_64.sh
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh && \
-sh /opt/Anaconda3-2022.05-Linux-x86_64.sh -b -p /opt/anaconda3 && \
-rm -f Anaconda3-2019.10-Linux-x86_64.sh
-# RUN wget https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh && \
-# sh /opt/Anaconda3-2019.10-Linux-x86_64.sh -b -p /opt/anaconda3 && \
-# rm -f Anaconda3-2019.10-Linux-x86_64.sh
-# set path
+    sh /opt/Anaconda3-2022.05-Linux-x86_64.sh -b -p /opt/anaconda3 && \
+    rm -f Anaconda3-2022.05-Linux-x86_64.sh
+
 ENV PATH /opt/anaconda3/bin:$PATH
 
-# update pip and conda
 RUN pip install --upgrade pip
 
 WORKDIR /
